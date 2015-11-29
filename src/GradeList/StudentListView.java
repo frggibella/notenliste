@@ -5,7 +5,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
@@ -50,7 +49,6 @@ public class StudentListView implements ActionListener {
     private JTextField totalPoints;
 
     private Filehandler filehandler;
-    private Grading grading;
 
 
     public ArrayList<JTextField> percentfields = new ArrayList<JTextField>();
@@ -87,8 +85,6 @@ public class StudentListView implements ActionListener {
         filehandler = new Filehandler(jFrame);
                 //Hilfsklasse für GUI wird aufgerufen
         initial();
-
-        grading = new Grading(jFrame);
 
     }
 
