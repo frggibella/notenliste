@@ -307,7 +307,7 @@ public class StudentListView implements ActionListener {
     private JPanel buildOverviewPanel(){
         //----------------------------------NOTENSCHLUESSEL-------------------------------->
         //Das Panel für den Notenschlüssel wird erzugt und mit einem Button versehen
-        JPanel gradekeyPanel = new JPanel(); //Kein Layout für das Panel gewählt = Borderlayout by default.
+        JPanel gradekeyPanel = new JPanel(new BorderLayout());
         JButton newKeyButton = new JButton("Aktualisieren");
         newKeyButton.addActionListener(this);
         gradekeyPanel.add(newKeyButton, BorderLayout.NORTH);
@@ -316,7 +316,7 @@ public class StudentListView implements ActionListener {
         PieDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset, "Notenverteilung");
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(200,200));
+        chartPanel.setPreferredSize(new Dimension(250,200));
         gradekeyPanel.add(chartPanel, BorderLayout.CENTER);
 
 
