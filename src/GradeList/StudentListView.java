@@ -63,6 +63,9 @@ public class StudentListView implements ActionListener {
     public JTextField threeSevenPercent;
     public JTextField fourPercent;
 
+    int  eins = 0, zwei = 0, drei = 0, vier = 0, fünf = 0;
+
+
 
     /**
      * Constructor
@@ -109,6 +112,9 @@ public class StudentListView implements ActionListener {
         jFrame.add(backgroundPanel);
         //Der Frame wird nachdem er zusammengebaut ist sichtbar gemacht.
         jFrame.setVisible(true);
+
+        // Berechneten Wert an  createDataset(int eins, int zwei,int drei,int vier,int fünf) weitergeben für Chartwerte
+        createDataset( eins,zwei,drei,vier,fünf);
     }
 
     private JMenuBar buildMenuBar(){
@@ -139,6 +145,8 @@ public class StudentListView implements ActionListener {
     }
 
     public String scoreCalculation(String points, String totalPoints){
+
+
         double score= 0;
         double scorePoint, scoreTotalPoint, one, oneThree, oneSeven, two, twoThree, twoSeven, three, threeThree, threeSeven, four;
             scorePoint = Double.parseDouble(points);
@@ -157,36 +165,57 @@ public class StudentListView implements ActionListener {
 
             if(scorePoint >=  (one/100.0 * scoreTotalPoint)){
                 score = 1.0;
+                eins+= 1;
+
             }
             else if(scorePoint >=  (oneThree/100.0 * scoreTotalPoint) && scorePoint <=  (one/100 * scoreTotalPoint)){
                 score = 1.3;
+                eins+= 1;
+
             }
             else if(scorePoint >=  (oneSeven/100.0 * scoreTotalPoint) && scorePoint <=  (oneThree/100 * scoreTotalPoint)){
                 score = 1.7;
+                eins+= 1;
+
             }
             else if(scorePoint >=  (two/100.0 * scoreTotalPoint) && scorePoint <=  (oneSeven/100 * scoreTotalPoint)){
                 score = 2.0;
+                zwei+= 1;
+
             }
             else if(scorePoint >=  (twoThree/100.0 * scoreTotalPoint) && scorePoint <=  (two/100 * scoreTotalPoint)){
                 score = 2.3;
+                zwei+= 1;
+
             }
             else if(scorePoint >=  (twoSeven/100.0 * scoreTotalPoint) && scorePoint <=  (twoThree/100 * scoreTotalPoint)){
                 score = 2.7;
+                zwei+= 1;
+
             }
             else if(scorePoint >=  (three/100.0 * scoreTotalPoint) && scorePoint <=  (twoSeven/100 * scoreTotalPoint)){
                 score = 3.0;
+                drei+= 1;
+
             }
             else if(scorePoint >=  (threeThree/100.0 * scoreTotalPoint) && scorePoint <=  (three/100 * scoreTotalPoint)){
                 score = 3.3;
+                drei+= 1;
+
             }
             else if(scorePoint >=  (threeSeven/100.0 * scoreTotalPoint) && scorePoint <=  (threeThree/100 * scoreTotalPoint)){
                 score = 3.7;
+                drei+= 1;
+
             }
             else if(scorePoint >=  (four/100.0 * scoreTotalPoint) && scorePoint <=  (threeSeven/100 * scoreTotalPoint)){
                 score = 4.0;
+                vier+= 1;
+
             }
             else if(scorePoint <  (four/100.0 * scoreTotalPoint)){
                 score = 5.0;
+                fünf += 1;
             }
 
 
@@ -286,11 +315,13 @@ public class StudentListView implements ActionListener {
         return listPanel;
     }
 
-    private PieDataset createDataset(){
+    private PieDataset createDataset(int eins, int zwei,int drei,int vier,int fünf){
         DefaultPieDataset result = new DefaultPieDataset();
-        result.setValue("Windows", 45);
-        result.setValue("Linux", 12);
-        result.setValue("Mac", 23);
+        result.setValue("1er", eins);
+        result.setValue("2er", zwei);
+        result.setValue("3er", drei);
+        result.setValue("4er", vier);
+        result.setValue("5er", fünf);
         return result;
 
     }
@@ -313,7 +344,7 @@ public class StudentListView implements ActionListener {
         gradekeyPanel.add(newKeyButton, BorderLayout.NORTH);
 
 
-        PieDataset dataset = createDataset();
+        PieDataset dataset = createDataset(eins,zwei,drei,vier,fünf);
         JFreeChart chart = createChart(dataset, "Notenverteilung");
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(250,200));
@@ -522,6 +553,12 @@ public class StudentListView implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
+        eins=0;
+        zwei=0;
+        drei=0;
+        vier=0;
+        fünf=0;
+
         if(actionCommand.matches("Speichern")){
             insertStudent();
             jFrame.remove(backgroundPanel);
@@ -569,11 +606,13 @@ public class StudentListView implements ActionListener {
             jFrame.remove(backgroundPanel);
             totalPoints.setText(filehandler.totPoints);
             int j = 0;
+
+
             for (String[] row : tableData){
                 tableData.get(j)[4]= scoreCalculation(row[3], totalPoints.getText());
                 j++;
             }
-            initial();
+           initial();
         }
         if(actionCommand.matches("Notenschlüssel")){;
             markWindow();
