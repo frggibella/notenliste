@@ -310,7 +310,7 @@ public class StudentListView implements ActionListener {
         JPanel gradekeyPanel = new JPanel(); //Kein Layout für das Panel gewählt = Borderlayout by default.
         JButton newKeyButton = new JButton("Aktualisieren");
         newKeyButton.addActionListener(this);
-        gradekeyPanel.add(newKeyButton);
+        gradekeyPanel.add(newKeyButton, BorderLayout.NORTH);
 
 
         PieDataset dataset = createDataset();
