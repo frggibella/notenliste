@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.io.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
@@ -64,6 +66,13 @@ public class StudentListView implements ActionListener {
     public JTextField fourPercent;
 
     int  eins = 0, zwei = 0, drei = 0, vier = 0, fünf = 0;
+    private int students = 0;
+    private double sum = 0.0;
+
+    private double bestMark = 6.0;
+    private double worstMark = 1.0;
+
+
 
 
 
@@ -81,7 +90,7 @@ public class StudentListView implements ActionListener {
         //Ein GUI Fenster wird in Form eines JFrames hergestellt und mit Optionen versehen.
         jFrame = new JFrame("Notenliste");
         jFrame.setSize(new Dimension(800, 600));
-        jFrame.setMinimumSize(new Dimension(600, 400));
+        jFrame.setMinimumSize(new Dimension(600, 500));
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setJMenuBar(buildMenuBar());
 
@@ -218,6 +227,16 @@ public class StudentListView implements ActionListener {
                 fünf += 1;
             }
 
+        if(score <= bestMark){
+            bestMark = score;
+        }
+
+        if(score >= worstMark){
+            worstMark = score;
+        }
+
+        students += 1;
+        sum += score;
 
         String source = Double.toString(score);
         return source;
@@ -328,10 +347,28 @@ public class StudentListView implements ActionListener {
 
     private JFreeChart createChart(PieDataset dataset, String title){
         JFreeChart chart = ChartFactory.createPieChart(title, dataset, false, true, false);
+
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setStartAngle(0);
+        plot.setShadowXOffset(0);
+        plot.setShadowYOffset(0);
+
+        plot.setSectionPaint("1er", Color.green);
+        plot.setSectionPaint("2er", Color.yellow);
+        plot.setSectionPaint("3er", Color.orange);
+        plot.setSectionPaint("4er", Color.pink);
+        plot.setSectionPaint("5er", Color.red);
+        plot.setBaseSectionOutlinePaint(Color.white);
+
+
+        plot.setBackgroundPaint(Color.white);
         plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.5f);
+
+        plot.setOutlineVisible(false);
+
+        plot.setLabelOutlinePaint(Color.white);
+        plot.setLabelBackgroundPaint(Color.white);
+        plot.setLabelShadowPaint(Color.white);
         return chart;
     }
 
@@ -343,19 +380,32 @@ public class StudentListView implements ActionListener {
         newKeyButton.addActionListener(this);
         gradekeyPanel.add(newKeyButton, BorderLayout.NORTH);
 
+        JPanel chartAllPanel = new JPanel(new BorderLayout());
+        JLabel chartTitle = new JLabel("Notenverteilung");
+        chartTitle.setHorizontalAlignment(0);
+        chartTitle.setPreferredSize(new Dimension(30,25));
+
 
         PieDataset dataset = createDataset(eins,zwei,drei,vier,fünf);
-        JFreeChart chart = createChart(dataset, "Notenverteilung");
+        JFreeChart chart = createChart(dataset, "");
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(250,200));
-        gradekeyPanel.add(chartPanel, BorderLayout.CENTER);
+        chartPanel.setPreferredSize(new Dimension(270,190));
+        chartAllPanel.add(chartTitle, BorderLayout.NORTH);
+        chartAllPanel.add(chartPanel, BorderLayout.CENTER);
+
+
+        gradekeyPanel.add(chartAllPanel, BorderLayout.CENTER);
+        JPanel overviewPanel = new JPanel(new GridLayout(4,2));
+        gradekeyPanel.add(overviewPanel, BorderLayout.SOUTH);
+
+
+
 
 
 
         //----------------------------------UEBERSICHT------------------------------------->
         //Das Panel für den Überblick wird erzugt und mit Dummywerten versehen.
-        JPanel overviewPanel = new JPanel(new GridLayout(6,1));
-        JLabel overall = new JLabel("  Gesamtpunkte:");
+        JLabel overall = new JLabel(" Gesamtpunkte:");
         if(totalPoints != null) {
             totalPoints = new JTextField(totalPoints.getText());
         }
@@ -363,16 +413,35 @@ public class StudentListView implements ActionListener {
             totalPoints = new JTextField();
         }
 
+        JLabel meanLabel = new JLabel(" Durchschnitt");
+        NumberFormat numberFormat = new DecimalFormat("0.00");
+        double temp= (sum/students);
+        JLabel meanValue = new JLabel(numberFormat.format(temp));
+
+        JLabel bestMarkLabel = new JLabel(" beste Note");
+        JLabel worstMarkLabel = new JLabel(" schlechteste Note");
+
+        JLabel bestMarkValue = new JLabel(Double.toString(bestMark));
+        JLabel worstMarkValue = new JLabel(Double.toString(worstMark));
+
+
         overviewPanel.add(overall);
         overviewPanel.add(totalPoints);
+
+        overviewPanel.add(meanLabel);
+        overviewPanel.add(meanValue);
+
+        overviewPanel.add(bestMarkLabel);
+        overviewPanel.add(bestMarkValue);
+
+        overviewPanel.add(worstMarkLabel);
+        overviewPanel.add(worstMarkValue);
 
         //----------------------------------BAUARBEITEN------------------------------------->
         //Ein Hilfspanel wird mit einen Gridlayout(2,1) erzeugt um den BL.EAST Abschnitt zu unterteilen.
         //Auf dieses Hilfspanel wird das Studentenpanel und das Notenschlüsselpanel gelegt.
-        JPanel leftSideSplitPanel = new JPanel(new GridLayout(2, 1));
-        leftSideSplitPanel.add(gradekeyPanel);
-        leftSideSplitPanel.add(overviewPanel);
-        return  leftSideSplitPanel;
+
+        return  gradekeyPanel;
     }
 
     private JPanel buildEntryPanel(){
@@ -558,6 +627,12 @@ public class StudentListView implements ActionListener {
         drei=0;
         vier=0;
         fünf=0;
+
+        bestMark= 6.0;
+        worstMark= 1.0;
+
+        sum=0.0;
+        students=0;
 
         if(actionCommand.matches("Speichern")){
             insertStudent();
