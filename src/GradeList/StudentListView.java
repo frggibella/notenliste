@@ -389,7 +389,7 @@ public class StudentListView implements ActionListener {
         PieDataset dataset = createDataset(eins,zwei,drei,vier,fünf);
         JFreeChart chart = createChart(dataset, "");
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(270,190));
+        chartPanel.setPreferredSize(new Dimension(290,160));
         chartAllPanel.add(chartTitle, BorderLayout.NORTH);
         chartAllPanel.add(chartPanel, BorderLayout.CENTER);
 
@@ -661,16 +661,20 @@ public class StudentListView implements ActionListener {
             initial();
         }
         if(actionCommand.matches("Klausur speichern")){
-            filehandler.saveExam(totalPoints, studentModel);
+            filehandler.saveExam(totalPoints, studentModel, 0);
             readStudentModel();
+            //jFrame.remove(backgroundPanel); //Nicht nötig, denk ich
+            //initial();
+        }
+        if(actionCommand.matches("OK")){
             jFrame.remove(backgroundPanel);
             initial();
         }
         if(actionCommand.matches("Klausur speichern unter")){
-            filehandler.saveExam(totalPoints, studentModel);
+            filehandler.saveExam(totalPoints, studentModel, 1);
             readStudentModel();
-            jFrame.remove(backgroundPanel);
-            initial();
+            //jFrame.remove(backgroundPanel);
+            //initial();
         }
         if(actionCommand.matches("Klausur laden")){
             tableData = new ArrayList<String[]>();
@@ -692,7 +696,6 @@ public class StudentListView implements ActionListener {
         if(actionCommand.matches("Notenschlüssel")){;
             markWindow();
         }
-
         if(actionCommand.matches("Übernehmen")){
             serializer();
             readStudentModel();
@@ -700,9 +703,5 @@ public class StudentListView implements ActionListener {
             initial();
         }
     }
-
-
-
-
 }
 
