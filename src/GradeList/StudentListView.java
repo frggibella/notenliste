@@ -95,7 +95,7 @@ public class StudentListView implements ActionListener {
         jFrame.setJMenuBar(buildMenuBar());
 
         filehandler = new Filehandler(jFrame);
-                //Hilfsklasse für GUI wird aufgerufen
+        //Hilfsklasse für GUI wird aufgerufen
         initial();
 
     }
@@ -342,7 +342,6 @@ public class StudentListView implements ActionListener {
         result.setValue("4er", vier);
         result.setValue("5er", fünf);
         return result;
-
     }
 
     private JFreeChart createChart(PieDataset dataset, String title){
@@ -359,7 +358,6 @@ public class StudentListView implements ActionListener {
         plot.setSectionPaint("4er", Color.pink);
         plot.setSectionPaint("5er", Color.red);
         plot.setBaseSectionOutlinePaint(Color.white);
-
 
         plot.setBackgroundPaint(Color.white);
         plot.setDirection(Rotation.CLOCKWISE);
@@ -616,7 +614,6 @@ public class StudentListView implements ActionListener {
 
     public static void main(String[] args) {
         StudentListView n = new StudentListView();
-
     }
 
     @Override
