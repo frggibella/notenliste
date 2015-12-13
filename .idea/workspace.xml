@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="388e16ed-3427-45b5-a3dc-2d3f204c0d00" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MVC/Control.java" afterPath="$PROJECT_DIR$/src/MVC/Control.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MVC/Model.java" afterPath="$PROJECT_DIR$/src/MVC/Model.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MVC/View.java" afterPath="$PROJECT_DIR$/src/MVC/View.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -31,8 +30,8 @@
       <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MVC/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.461538" vertical-offset="940" max-vertical-offset="2655">
-              <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+            <state vertical-scroll-proportion="27.5" vertical-offset="2110" max-vertical-offset="2655">
+              <caret line="93" column="64" selection-start-line="93" selection-start-column="59" selection-end-line="93" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#363#364#0" expanded="true" />
@@ -49,8 +48,8 @@
       <file leaf-file-name="View.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MVC/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.115385" vertical-offset="4983" max-vertical-offset="5745">
-              <caret line="348" column="21" selection-start-line="348" selection-start-column="21" selection-end-line="348" selection-end-column="21" />
+            <state vertical-scroll-proportion="-15.115385" vertical-offset="5247" max-vertical-offset="6675">
+              <caret line="376" column="56" selection-start-line="376" selection-start-column="56" selection-end-line="376" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,12 +60,12 @@
       <file leaf-file-name="Control.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MVC/Control.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4793233" vertical-offset="630" max-vertical-offset="4530">
-              <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+            <state vertical-scroll-proportion="8.458647" vertical-offset="0" max-vertical-offset="4965">
+              <caret line="300" column="0" selection-start-line="300" selection-start-column="0" selection-end-line="300" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#10259#10260#0" expanded="true" />
-                <element signature="e#10300#10301#0" expanded="true" />
+                <element signature="e#11388#11389#0" expanded="true" />
+                <element signature="e#11429#11430#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -508,7 +507,11 @@
       <created>1450010744410</created>
       <updated>1450010744410</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Valuierung der Berechnung des Notenschlüssels:&#10;Wenn der Notenschlüssel nicht korrekt eingegeben wird, oder die Gesamtpunkte fehlen: Note: keine Angabe">
+      <created>1450015134850</created>
+      <updated>1450015134850</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -540,6 +543,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3931507" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3958904" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -555,7 +559,6 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17945206" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -608,7 +611,8 @@
     <MESSAGE value="Commit vor MVC&#10;&#10;Speichern-Button, left Side Panel;" />
     <MESSAGE value="Commit nach MVC&#10;&#10;Speichern, Laden von Dateien&#10;Laden des Notenspiegels aus Datei;" />
     <MESSAGE value="Commit nach MVC&#10;&#10;Valuierung der Eintragung von neuen Studentendaten&#10;durch successWindow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit nach MVC&#10;&#10;Valuierung der Eintragung von neuen Studentendaten&#10;durch successWindow" />
+    <MESSAGE value="Valuierung der Berechnung des Notenschlüssels:&#10;Wenn der Notenschlüssel nicht korrekt eingegeben wird, oder die Gesamtpunkte fehlen: Note: keine Angabe" />
+    <option name="LAST_COMMIT_MESSAGE" value="Valuierung der Berechnung des Notenschlüssels:&#10;Wenn der Notenschlüssel nicht korrekt eingegeben wird, oder die Gesamtpunkte fehlen: Note: keine Angabe" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -638,7 +642,7 @@
           <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="177" />
+      <option name="time" value="238" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -690,8 +694,8 @@
           <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10259#10260#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
+            <element signature="e#11388#11389#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -728,8 +732,8 @@
           <caret line="189" column="23" selection-start-line="189" selection-start-column="18" selection-end-line="189" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10259#10260#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
+            <element signature="e#11388#11389#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -774,8 +778,8 @@
           <caret line="189" column="23" selection-start-line="189" selection-start-column="18" selection-end-line="189" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10259#10260#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
+            <element signature="e#11388#11389#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -820,8 +824,8 @@
           <caret line="189" column="23" selection-start-line="189" selection-start-column="18" selection-end-line="189" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10259#10260#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
+            <element signature="e#11388#11389#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -866,8 +870,8 @@
           <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10259#10260#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
+            <element signature="e#11388#11389#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -904,8 +908,8 @@
           <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10259#10260#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
+            <element signature="e#11388#11389#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1083,8 +1087,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MVC/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.461538" vertical-offset="940" max-vertical-offset="2655">
-          <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+        <state vertical-scroll-proportion="27.5" vertical-offset="2110" max-vertical-offset="2655">
+          <caret line="93" column="64" selection-start-line="93" selection-start-column="59" selection-end-line="93" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#363#364#0" expanded="true" />
@@ -1099,8 +1103,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MVC/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.115385" vertical-offset="4983" max-vertical-offset="5745">
-          <caret line="348" column="21" selection-start-line="348" selection-start-column="21" selection-end-line="348" selection-end-column="21" />
+        <state vertical-scroll-proportion="-15.115385" vertical-offset="5247" max-vertical-offset="6675">
+          <caret line="376" column="56" selection-start-line="376" selection-start-column="56" selection-end-line="376" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1109,12 +1113,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MVC/Control.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4793233" vertical-offset="630" max-vertical-offset="4530">
-          <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+        <state vertical-scroll-proportion="8.458647" vertical-offset="0" max-vertical-offset="4965">
+          <caret line="300" column="0" selection-start-line="300" selection-start-column="0" selection-end-line="300" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10259#10260#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
+            <element signature="e#11388#11389#0" expanded="true" />
+            <element signature="e#11429#11430#0" expanded="true" />
           </folding>
         </state>
       </provider>

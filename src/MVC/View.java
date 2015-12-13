@@ -38,10 +38,13 @@ public class View extends JFrame {
     public JTextField matrikel;
     public JTextField points;
 
-    JFrame success;
+    public JTable table;
+    public JFrame success;
+    public JFrame deleteWindowFrame;
 
 
     public JTextField totalPoints;
+
 
     public ArrayList<JTextField> textFields;
 
@@ -133,8 +136,14 @@ public class View extends JFrame {
 
         String[] tableHeadData = { "Vorname", "Nachname", "Matrikelnummer", "Punkte", "Note"};
         studentModel = new DefaultTableModel(temp, tableHeadData);
-        JTable table = new JTable(studentModel);
+        table = new JTable(studentModel);
         table.setCellEditor(new DefaultCellEditor(new JTextField()));
+
+
+
+
+
+
         JScrollPane scrollPane = new JScrollPane(table);
         listPanel.add(scrollPane);
 
@@ -181,9 +190,20 @@ public class View extends JFrame {
         //----------------------------------NOTENSCHLUESSEL-------------------------------->
         //Das Panel für den Notenschlüssel wird erzugt und mit einem Button versehen
         JPanel gradekeyPanel = new JPanel(new BorderLayout());
+
         JButton newKeyButton = new JButton("Aktualisieren");
         newKeyButton.addActionListener(listner);
-        gradekeyPanel.add(newKeyButton, BorderLayout.NORTH);
+        newKeyButton.setForeground(Color.darkGray);
+
+        JButton deleteButton = new JButton("Löschen");
+        deleteButton.setForeground(Color.RED);
+        deleteButton.addActionListener(listner);
+
+        JPanel deleteActualizePanel = new JPanel(new GridLayout(1,2));
+        deleteActualizePanel.add(newKeyButton);
+        deleteActualizePanel.add(deleteButton);
+
+        gradekeyPanel.add(deleteActualizePanel, BorderLayout.NORTH);
 
         JPanel chartAllPanel = new JPanel(new BorderLayout());
         JLabel chartTitle = new JLabel("Notenverteilung");
@@ -206,6 +226,7 @@ public class View extends JFrame {
         JLabel overall = new JLabel(" Gesamtpunkte:");
         if(totalPoints != null) {
             totalPoints = new JTextField(totalPoints.getText());
+           // totalPoints.addActionListener(listner);
         }
         else{
             totalPoints = new JTextField();
@@ -319,7 +340,7 @@ public class View extends JFrame {
     }
 
     public void successWindow(boolean result, int i){
-        success = new JFrame("Eingabe überprüft");
+        success = new JFrame("Hinweis");
         success.setSize(new Dimension(400, 80));
         success.setLocationRelativeTo(this);
 
@@ -349,6 +370,12 @@ public class View extends JFrame {
         else if(i== 6){
             choiceFalse = "Bitte tragen Sie den Notenschlüssel ein.\n\n  ";
         }
+        else if(i== 7){
+            choiceFalse = "Bitte wählen Sie einen Eintrag in der Liste.\n\n  ";
+        }
+        else if(i== 8){
+            choiceFalse = "Löschen war nicht erfolgreich.\n\n  ";
+        }
 
         WindowPanel.setLayout(new BoxLayout(WindowPanel, BoxLayout.PAGE_AXIS));
 
@@ -372,6 +399,41 @@ public class View extends JFrame {
         WindowPanel2.add(WindowPanel);
         success.add(WindowPanel2);
         success.setVisible(true);
+    }
+
+    public void deleteWindow(){
+        deleteWindowFrame = new JFrame("Student löschen");
+        deleteWindowFrame.setSize(new Dimension(300, 80));
+        deleteWindowFrame.setLocationRelativeTo(this);
+
+        JPanel framePanel = new JPanel(new GridLayout(2,1));
+        JLabel deleteQuestion = new JLabel("Wollen Sie den Eintrag wirklich löschen?");
+        deleteQuestion.setHorizontalAlignment(0);
+
+        framePanel.add(deleteQuestion);
+
+        JPanel answerPanel = new JPanel(new GridLayout(1,2));
+
+        JButton yes = new JButton("Ja");
+        yes.addActionListener(listner);
+
+        JButton no = new JButton("Nein");
+        no.addActionListener(listner);
+
+
+        answerPanel.add(yes);
+        answerPanel.add(no);
+
+        framePanel.add(answerPanel);
+
+        deleteWindowFrame.add(framePanel);
+        deleteWindowFrame.setVisible(true);
+
+
+        //JPanel DeleteWindowPanel = new JPanel(new GridLayout(2,1));
+        //JPanel WindowPanel2 = new JPanel();
 
     }
-}
+
+
+    }

@@ -1,6 +1,7 @@
 package MVC;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Control implements ActionListener {
 
     public String scoreCalculation(String points, String totalPoints){
         double score= 0.0;
-        int scorePoint, scoreTotalPoint, one = 0, oneThree = 0, oneSeven = 0, two = 0, twoThree = 0, twoSeven = 0, three = 0, threeThree = 0, threeSeven = 0, four = 0;
+        double scorePoint, scoreTotalPoint, one = 0, oneThree = 0, oneSeven = 0, two = 0, twoThree = 0, twoSeven = 0, three = 0, threeThree = 0, threeSeven = 0, four = 0;
 
         //--------überprüfen, ob Punkte des Studenten eingegeben sind
         try {
@@ -41,7 +42,7 @@ public class Control implements ActionListener {
         }
 
         String source;
-
+        //--------Notenspiegel-Array wird geladen
         ArrayList<String> saetze  = model.loadGrading2();
 
         //--------überprüfen, ob Notenspiegel eingegeben ist
@@ -60,36 +61,37 @@ public class Control implements ActionListener {
             one = 0;
         }
 
-        if(scoreTotalPoint != 0 && one != 0  ) {
+        if(scoreTotalPoint != 0 && one != 0  && scorePoint != 0) {
+            double x=  one / 100.0 * scoreTotalPoint;
 
             if (scorePoint >= (one / 100.0 * scoreTotalPoint)) {
                 score = 1.0;
                 view.eins += 1;
-            } else if (scorePoint >= (oneThree / 100.0 * scoreTotalPoint) && scorePoint <= (one / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (oneThree / 100.0 * scoreTotalPoint) && scorePoint < (one / 100 * scoreTotalPoint)) {
                 score = 1.3;
                 view.eins += 1;
-            } else if (scorePoint >= (oneSeven / 100.0 * scoreTotalPoint) && scorePoint <= (oneThree / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (oneSeven / 100.0 * scoreTotalPoint) && scorePoint < (oneThree / 100 * scoreTotalPoint)) {
                 score = 1.7;
                 view.eins += 1;
-            } else if (scorePoint >= (two / 100.0 * scoreTotalPoint) && scorePoint <= (oneSeven / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (two / 100.0 * scoreTotalPoint) && scorePoint < (oneSeven / 100 * scoreTotalPoint)) {
                 score = 2.0;
                 view.zwei += 1;
-            } else if (scorePoint >= (twoThree / 100.0 * scoreTotalPoint) && scorePoint <= (two / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (twoThree / 100.0 * scoreTotalPoint) && scorePoint < (two / 100 * scoreTotalPoint)) {
                 score = 2.3;
                 view.zwei += 1;
-            } else if (scorePoint >= (twoSeven / 100.0 * scoreTotalPoint) && scorePoint <= (twoThree / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (twoSeven / 100.0 * scoreTotalPoint) && scorePoint < (twoThree / 100 * scoreTotalPoint)) {
                 score = 2.7;
                 view.zwei += 1;
-            } else if (scorePoint >= (three / 100.0 * scoreTotalPoint) && scorePoint <= (twoSeven / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (three / 100.0 * scoreTotalPoint) && scorePoint < (twoSeven / 100 * scoreTotalPoint)) {
                 score = 3.0;
                 view.drei += 1;
-            } else if (scorePoint >= (threeThree / 100.0 * scoreTotalPoint) && scorePoint <= (three / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (threeThree / 100.0 * scoreTotalPoint) && scorePoint < (three / 100 * scoreTotalPoint)) {
                 score = 3.3;
                 view.drei += 1;
-            } else if (scorePoint >= (threeSeven / 100.0 * scoreTotalPoint) && scorePoint <= (threeThree / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (threeSeven / 100.0 * scoreTotalPoint) && scorePoint < (threeThree / 100 * scoreTotalPoint)) {
                 score = 3.7;
                 view.drei += 1;
-            } else if (scorePoint >= (four / 100.0 * scoreTotalPoint) && scorePoint <= (threeSeven / 100 * scoreTotalPoint)) {
+            } else if (scorePoint >= (four / 100.0 * scoreTotalPoint) && scorePoint < (threeSeven / 100 * scoreTotalPoint)) {
                 score = 4.0;
                 view.vier += 1;
             } else if (scorePoint < (four / 100.0 * scoreTotalPoint)) {
@@ -220,14 +222,9 @@ public class Control implements ActionListener {
 
         if(actionCommand.matches("Eintragen")){
             insertStudent();
-
             readStudentModel();
-            /*
-
-            */
-            //view.remove(view.backgroundPanel);
-            //view.initial(tableData);
         }
+
         if(actionCommand.matches("Aktualisieren")){
             readStudentModel();
             view.remove(view.backgroundPanel);
@@ -286,7 +283,39 @@ public class Control implements ActionListener {
             model.serializer(view.textFields);
             readStudentModel();
             view.remove(view.backgroundPanel);
+            int j = 0;
+            for (String[] row : tableData){
+                tableData.get(j)[4]= scoreCalculation(row[3], view.totalPoints.getText());
+                j++;
+            }
             view.initial(tableData);
+        }
+
+        if(actionCommand.matches("Löschen")) {
+            try {
+                int rowToRemove = view.table.getSelectedRow();
+                if(rowToRemove >=0)
+                    view.deleteWindow();
+                else
+                    view.successWindow(false, 7);
+
+            } catch (Exception E) {
+                view.successWindow(false, 7);
+            }
+        }
+
+        if(actionCommand.matches("Ja")) {
+            try {
+                int rowToRemove = view.table.getSelectedRow();
+                ((DefaultTableModel) view.table.getModel()).removeRow(rowToRemove);
+                view.deleteWindowFrame.dispose();
+            }catch (Exception E){
+                view.successWindow(false, 8);
+                view.deleteWindowFrame.dispose();
+            }
+        }
+        if(actionCommand.matches("Nein")) {
+            view.deleteWindowFrame.dispose();
         }
     }
 
