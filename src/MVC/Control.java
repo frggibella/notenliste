@@ -26,7 +26,12 @@ public class Control implements ActionListener {
         double score= 0;
         double scorePoint, scoreTotalPoint, one, oneThree, oneSeven, two, twoThree, twoSeven, three, threeThree, threeSeven, four;
         scorePoint = Double.parseDouble(points);
-        scoreTotalPoint = Double.parseDouble(totalPoints);
+        try {
+            scoreTotalPoint = Double.parseDouble(totalPoints);
+        }catch (Exception E){
+            scoreTotalPoint= 0.0;
+            view.successWindow(false, 3);
+        }
 
         ArrayList<String> saetze  = model.loadGrading2();
 
@@ -106,8 +111,65 @@ public class Control implements ActionListener {
     }
 
     private void insertStudent(){
-        String[] row = {view.prename.getText(), view.lastname.getText(),view.matrikel.getText(),view.points.getText()};
-        tableData.add(row);
+        boolean textCheck = false;
+        boolean textLengthCheck = false;
+        boolean matrikelCheck = false;
+        boolean pointsCheck = false;
+        boolean cloneMatrikel = false;
+
+        if(view.prename.getText().trim().length() > 0 && view.lastname.getText().trim().length() > 0){
+            textCheck = true;
+        }
+
+        if(view.prename.getText().trim().length() <20 && view.lastname.getText().trim().length() <20) {
+            textLengthCheck = true;
+        }
+
+        try {
+            int test= Integer.parseInt(view.matrikel.getText());
+            if(test <1000000 && test >= 100000)
+            {
+                matrikelCheck = true;
+            }
+            for (String[] strings : tableData){
+                if(strings[2].matches(view.matrikel.getText())){
+                    cloneMatrikel = true;
+                }
+            }
+        }catch (Exception E){
+        }
+
+        try {
+            int test = Integer.parseInt(view.points.getText());
+            if(test  > 0){
+                pointsCheck = true;
+            }
+        }catch (Exception E){
+        }
+
+        if(textCheck && matrikelCheck && textLengthCheck && pointsCheck && !cloneMatrikel) {
+            String[] row = {view.prename.getText().trim(), view.lastname.getText().trim(), view.matrikel.getText(), view.points.getText()};
+            tableData.add(row);
+            view.remove(view.backgroundPanel);
+            view.initial(tableData);
+            readStudentModel();
+
+            int j = 0;
+            for (String[] strings : tableData){
+                tableData.get(j)[4]= scoreCalculation(strings[3], view.totalPoints.getText());
+                j++;
+            }
+            int i=0;
+            i++;
+            view.remove(view.backgroundPanel);
+            view.initial(tableData);
+        }
+        else {
+            if(cloneMatrikel)
+                view.successWindow(false, 4);
+            else
+                view.successWindow(false, 2);
+        }
     }
 
     @Override
@@ -127,18 +189,13 @@ public class Control implements ActionListener {
 
         if(actionCommand.matches("Eintragen")){
             insertStudent();
-            view.remove(view.backgroundPanel);
 
-            view.initial(tableData);
             readStudentModel();
+            /*
 
-            int j = 0;
-            for (String[] row : tableData){
-                tableData.get(j)[4]= scoreCalculation(row[3], view.totalPoints.getText());
-                j++;
-            }
-            view.remove(view.backgroundPanel);
-            view.initial(tableData);
+            */
+            //view.remove(view.backgroundPanel);
+            //view.initial(tableData);
         }
         if(actionCommand.matches("Aktualisieren")){
             readStudentModel();
@@ -149,16 +206,14 @@ public class Control implements ActionListener {
                 tableData.get(j)[4]= scoreCalculation(row[3], view.totalPoints.getText());
                 j++;
             }
-
             view.initial(tableData);
         }
         if(actionCommand.matches("Klausur speichern")){
-            if(model.saveExam(view.totalPoints, view.studentModel, 0)== false){
-                view.successWindow( false);
-
+            if(!model.saveExam(view.totalPoints, view.studentModel, 0)){
+                view.successWindow(false, 1);
             }
             else{
-                view.successWindow(true);
+                view.successWindow(true, 1);
             }
             readStudentModel();
             //jFrame.remove(backgroundPanel); //Nicht nötig, denk ich
@@ -166,14 +221,13 @@ public class Control implements ActionListener {
         }
         if(actionCommand.matches("OK")){
             view.success.dispose();
-
         }
         if(actionCommand.matches("Klausur speichern unter")){
-            if(model.saveExam(view.totalPoints, view.studentModel, 1)== false){
-                view.successWindow(false);
+            if(!model.saveExam(view.totalPoints, view.studentModel, 1)){
+                view.successWindow(false, 1);
             }
             else{
-                view.successWindow(true);
+                view.successWindow(true, 1);
             }            readStudentModel();
             view.setTitle(model.windowTitle);
             //jFrame.remove(backgroundPanel);
@@ -186,10 +240,6 @@ public class Control implements ActionListener {
             view.remove(view.backgroundPanel);
             view.totalPoints.setText(model.totPoints);
 
-            if(view.textFields != null)
-            model.loadGrading(view.textFields);
-
-
             int j = 0;
             for (String[] row : tableData){
                 tableData.get(j)[4]= scoreCalculation(row[3], view.totalPoints.getText());
@@ -197,7 +247,7 @@ public class Control implements ActionListener {
             }
             view.initial(tableData);
         }
-        if(actionCommand.matches("Notenschlüssel")){;
+        if(actionCommand.matches("Notenschlüssel")){
             view.markWindow();
             model.loadGrading(view.textFields);
         }

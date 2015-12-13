@@ -58,8 +58,12 @@ public class View extends JFrame {
         //Ein GUI Fenster wird in Form eines JFrames hergestellt und mit Optionen versehen. MetFrame
         super("Notenliste");
         this.listner = listner;
+
+        validate();
         setSize(new Dimension(800, 600));
         setMinimumSize(new Dimension(600, 500));
+
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setJMenuBar(buildMenuBar());
     }
@@ -314,7 +318,7 @@ public class View extends JFrame {
         mark.setVisible(true);
     }
 
-    public void successWindow(boolean result){
+    public void successWindow(boolean result, int i){
         success = new JFrame("Eingabe überprüft");
         success.setSize(new Dimension(400, 80));
         success.setLocationRelativeTo(this);
@@ -323,15 +327,32 @@ public class View extends JFrame {
         JPanel WindowPanel = new JPanel(new GridLayout(2,1));
         JPanel WindowPanel2 = new JPanel();
 
+        String choiceTrue = "Eingabe korrekt";
+        String choiceFalse= "Eingabe inkorrekt";
+
+        if(i== 1){
+            choiceTrue =  "Klausur erfolgreich gespeichert.\n\n  ";
+            choiceFalse = "Klausur wurde nicht gespeichert.\n\n  ";
+        }
+        else if(i== 2){
+            choiceFalse = "Pflichtfelder inkorrekt befüllt\n\n  ";
+        }
+        else if(i== 3){
+            choiceFalse = "Bitte Gesamtpunkte eintragen.\n\n  ";
+        }
+        else if(i== 4){
+            choiceFalse = "Matrikelnummer bereits eingetragen.\n\n  ";
+        }
+
         WindowPanel.setLayout(new BoxLayout(WindowPanel, BoxLayout.PAGE_AXIS));
 
-        if(result == true) {
-            JLabel testLabel = new JLabel("Klausur erfolgreich gespeichert.\n\n  ");
+        if(result) {
+            JLabel testLabel = new JLabel(choiceTrue);
             testLabel.setHorizontalAlignment(0);
             WindowPanel.add(testLabel);
         }
         else{
-            JLabel testLabel = new JLabel("Klausur wurde nicht gespeichert.\n\n  ");
+            JLabel testLabel = new JLabel(choiceFalse);
             testLabel.setHorizontalAlignment(0);
             WindowPanel.add(testLabel);
         }
