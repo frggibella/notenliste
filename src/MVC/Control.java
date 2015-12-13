@@ -23,73 +23,93 @@ public class Control implements ActionListener {
     }
 
     public String scoreCalculation(String points, String totalPoints){
-        double score= 0;
-        double scorePoint, scoreTotalPoint, one, oneThree, oneSeven, two, twoThree, twoSeven, three, threeThree, threeSeven, four;
-        scorePoint = Double.parseDouble(points);
+        double score= 0.0;
+        int scorePoint, scoreTotalPoint, one = 0, oneThree = 0, oneSeven = 0, two = 0, twoThree = 0, twoSeven = 0, three = 0, threeThree = 0, threeSeven = 0, four = 0;
+
+        //--------überprüfen, ob Punkte des Studenten eingegeben sind
         try {
-            scoreTotalPoint = Double.parseDouble(totalPoints);
+            scorePoint = Integer.parseInt(points);
         }catch (Exception E){
-            scoreTotalPoint= 0.0;
-            view.successWindow(false, 3);
+            scorePoint = 0;
         }
+
+        //--------überprüfen, ob Gesamtpunkte eingegeben sind
+        try {
+            scoreTotalPoint = Integer.parseInt(totalPoints);
+        }catch (Exception E){
+            scoreTotalPoint= 0;
+        }
+
+        String source;
 
         ArrayList<String> saetze  = model.loadGrading2();
 
-        one = Double.parseDouble(saetze.get(0));
-        oneThree = Double.parseDouble(saetze.get(1));
-        oneSeven = Double.parseDouble(saetze.get(2));
-        two = Double.parseDouble(saetze.get(3));
-        twoThree = Double.parseDouble(saetze.get(4));
-        twoSeven = Double.parseDouble(saetze.get(5));
-        three = Double.parseDouble(saetze.get(6));
-        threeThree = Double.parseDouble(saetze.get(7));
-        threeSeven = Double.parseDouble(saetze.get(8));
-        four = Double.parseDouble(saetze.get(9));
+        //--------überprüfen, ob Notenspiegel eingegeben ist
+        try {
+            one = Integer.parseInt(saetze.get(0));
+            oneThree = Integer.parseInt(saetze.get(1));
+            oneSeven = Integer.parseInt(saetze.get(2));
+            two = Integer.parseInt(saetze.get(3));
+            twoThree = Integer.parseInt(saetze.get(4));
+            twoSeven = Integer.parseInt(saetze.get(5));
+            three = Integer.parseInt(saetze.get(6));
+            threeThree = Integer.parseInt(saetze.get(7));
+            threeSeven = Integer.parseInt(saetze.get(8));
+            four = Integer.parseInt(saetze.get(9));
+        }catch (Exception E){
+            one = 0;
+        }
 
-        if (scorePoint >= (one / 100.0 * scoreTotalPoint)) {
-            score = 1.0;
-            view.eins += 1;
-        } else if (scorePoint >= (oneThree / 100.0 * scoreTotalPoint) && scorePoint <= (one / 100 * scoreTotalPoint)) {
-            score = 1.3;
-            view.eins += 1;
-        } else if (scorePoint >= (oneSeven / 100.0 * scoreTotalPoint) && scorePoint <= (oneThree / 100 * scoreTotalPoint)) {
-            score = 1.7;
-            view.eins += 1;
-        } else if (scorePoint >= (two / 100.0 * scoreTotalPoint) && scorePoint <= (oneSeven / 100 * scoreTotalPoint)) {
-            score = 2.0;
-            view.zwei += 1;
-        } else if (scorePoint >= (twoThree / 100.0 * scoreTotalPoint) && scorePoint <= (two / 100 * scoreTotalPoint)) {
-            score = 2.3;
-            view.zwei += 1;
-        } else if (scorePoint >= (twoSeven / 100.0 * scoreTotalPoint) && scorePoint <= (twoThree / 100 * scoreTotalPoint)) {
-            score = 2.7;
-            view.zwei += 1;
-        } else if (scorePoint >= (three / 100.0 * scoreTotalPoint) && scorePoint <= (twoSeven / 100 * scoreTotalPoint)) {
-            score = 3.0;
-            view.drei += 1;
-        } else if (scorePoint >= (threeThree / 100.0 * scoreTotalPoint) && scorePoint <= (three / 100 * scoreTotalPoint)) {
-            score = 3.3;
-            view.drei += 1;
-        } else if (scorePoint >= (threeSeven / 100.0 * scoreTotalPoint) && scorePoint <= (threeThree / 100 * scoreTotalPoint)) {
-            score = 3.7;
-            view.drei += 1;
-        } else if (scorePoint >= (four / 100.0 * scoreTotalPoint) && scorePoint <= (threeSeven / 100 * scoreTotalPoint)) {
-            score = 4.0;
-            view.vier += 1;
-        } else if (scorePoint < (four / 100.0 * scoreTotalPoint)) {
-            score = 5.0;
-            view.fünf += 1;
-        }
-        if (score <= view.bestMark) {
-            view.bestMark = score;
-        }
-        if (score >= view.worstMark) {
-            view.worstMark = score;
-        }
-        view.students += 1;
-        view.sum += score;
+        if(scoreTotalPoint != 0 && one != 0  ) {
 
-        String source = Double.toString(score);
+            if (scorePoint >= (one / 100.0 * scoreTotalPoint)) {
+                score = 1.0;
+                view.eins += 1;
+            } else if (scorePoint >= (oneThree / 100.0 * scoreTotalPoint) && scorePoint <= (one / 100 * scoreTotalPoint)) {
+                score = 1.3;
+                view.eins += 1;
+            } else if (scorePoint >= (oneSeven / 100.0 * scoreTotalPoint) && scorePoint <= (oneThree / 100 * scoreTotalPoint)) {
+                score = 1.7;
+                view.eins += 1;
+            } else if (scorePoint >= (two / 100.0 * scoreTotalPoint) && scorePoint <= (oneSeven / 100 * scoreTotalPoint)) {
+                score = 2.0;
+                view.zwei += 1;
+            } else if (scorePoint >= (twoThree / 100.0 * scoreTotalPoint) && scorePoint <= (two / 100 * scoreTotalPoint)) {
+                score = 2.3;
+                view.zwei += 1;
+            } else if (scorePoint >= (twoSeven / 100.0 * scoreTotalPoint) && scorePoint <= (twoThree / 100 * scoreTotalPoint)) {
+                score = 2.7;
+                view.zwei += 1;
+            } else if (scorePoint >= (three / 100.0 * scoreTotalPoint) && scorePoint <= (twoSeven / 100 * scoreTotalPoint)) {
+                score = 3.0;
+                view.drei += 1;
+            } else if (scorePoint >= (threeThree / 100.0 * scoreTotalPoint) && scorePoint <= (three / 100 * scoreTotalPoint)) {
+                score = 3.3;
+                view.drei += 1;
+            } else if (scorePoint >= (threeSeven / 100.0 * scoreTotalPoint) && scorePoint <= (threeThree / 100 * scoreTotalPoint)) {
+                score = 3.7;
+                view.drei += 1;
+            } else if (scorePoint >= (four / 100.0 * scoreTotalPoint) && scorePoint <= (threeSeven / 100 * scoreTotalPoint)) {
+                score = 4.0;
+                view.vier += 1;
+            } else if (scorePoint < (four / 100.0 * scoreTotalPoint)) {
+                score = 5.0;
+                view.fünf += 1;
+            }
+            if (score <= view.bestMark) {
+                view.bestMark = score;
+            }
+            if (score >= view.worstMark) {
+                view.worstMark = score;
+            }
+            view.students += 1;
+            view.sum += score;
+
+            source = Double.toString(score);
+        }
+        else
+            source = "keine Angabe";
+
         return source;
     }
 
@@ -111,11 +131,19 @@ public class Control implements ActionListener {
     }
 
     private void insertStudent(){
+
         boolean textCheck = false;
         boolean textLengthCheck = false;
         boolean matrikelCheck = false;
         boolean pointsCheck = false;
         boolean cloneMatrikel = false;
+
+        double scoreTotalPoint = 0.0;
+        try {
+            scoreTotalPoint = Double.parseDouble(view.totalPoints.getText());
+        }catch (Exception E){
+
+        }
 
         if(view.prename.getText().trim().length() > 0 && view.lastname.getText().trim().length() > 0){
             textCheck = true;
@@ -147,7 +175,9 @@ public class Control implements ActionListener {
         }catch (Exception E){
         }
 
-        if(textCheck && matrikelCheck && textLengthCheck && pointsCheck && !cloneMatrikel) {
+        //------------------------------erst hier wird der neue Student angelegt-----------------------------
+
+        if(textCheck && matrikelCheck && textLengthCheck && pointsCheck && !cloneMatrikel && scoreTotalPoint != 0.0) {
             String[] row = {view.prename.getText().trim(), view.lastname.getText().trim(), view.matrikel.getText(), view.points.getText()};
             tableData.add(row);
             view.remove(view.backgroundPanel);
@@ -159,13 +189,14 @@ public class Control implements ActionListener {
                 tableData.get(j)[4]= scoreCalculation(strings[3], view.totalPoints.getText());
                 j++;
             }
-            int i=0;
-            i++;
             view.remove(view.backgroundPanel);
             view.initial(tableData);
         }
         else {
-            if(cloneMatrikel)
+            if(scoreTotalPoint == 0.0){
+                view.successWindow(false, 5);
+            }
+            else  if(cloneMatrikel)
                 view.successWindow(false, 4);
             else
                 view.successWindow(false, 2);

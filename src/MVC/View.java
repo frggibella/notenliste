@@ -343,6 +343,12 @@ public class View extends JFrame {
         else if(i== 4){
             choiceFalse = "Matrikelnummer bereits eingetragen.\n\n  ";
         }
+        else if(i== 5){
+            choiceFalse = "Bitte tragen Sie die Gesamtpunkte ein.\n\n  ";
+        }
+        else if(i== 6){
+            choiceFalse = "Bitte tragen Sie den Notenschlüssel ein.\n\n  ";
+        }
 
         WindowPanel.setLayout(new BoxLayout(WindowPanel, BoxLayout.PAGE_AXIS));
 

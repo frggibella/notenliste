@@ -80,7 +80,7 @@ public class Model {
         try {
             fileStream = new FileInputStream("Notenspiegel");
             ObjectInputStream ois = new ObjectInputStream(fileStream);
-            safeFile = ( ArrayList<String> )ois.readObject();
+            safeFile = (ArrayList<String>)ois.readObject();
             ois.close();
         }
         catch (Exception e) {
@@ -114,9 +114,8 @@ public class Model {
 
             inFile = chooser.getSelectedFile().toString();
             windowTitle = "Notenliste" + " - " + inFile.substring(inFile.lastIndexOf("/")).replace("/", "");
-
-
         }
+
         File ausgabeDatei = new File(inFile);
         try {
             FileWriter writer = new FileWriter(ausgabeDatei);
